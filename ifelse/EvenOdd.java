@@ -4,6 +4,9 @@ import java.util.Scanner;
 
 //Even Odd
 
+//ex:1
+
+
 //public class EvenOdd {
 //	public static void main(String[] args) {
 //		int num = 15;
@@ -16,6 +19,8 @@ import java.util.Scanner;
 //		}
 //	}
 //}
+
+//ex:2
 
 
 //public class EvenOdd{
@@ -31,6 +36,9 @@ import java.util.Scanner;
 //}
 
 
+//ex:3
+
+
 //public class EvenOdd{
 //	public static void main(String[] args) {
 //		int num=17;
@@ -43,7 +51,10 @@ import java.util.Scanner;
 //	}
 //}
 
-//
+
+//ex:4
+
+
 //public class EvenOdd{
 //public static void main(String[] args)	{
 //	int num =54;
@@ -55,6 +66,8 @@ import java.util.Scanner;
 //}
 //}
 
+
+//ex:5
 
 //public class EvenOdd{
 //	public static void main(String[] args) {
@@ -69,19 +82,3 @@ import java.util.Scanner;
 //}
 
 
-
-
-public class EvenOdd{
-	public static void main(String[] args) {
-		Scanner sc =new Scanner(System.in);
-//		System.out.println("Enter the number");
-		int num=sc.nextInt();
-		
-		if(num%2==0) {
-			System.out.println("this is Even number");
-		} else {
-			System.out.println("this is Odd number");
-		}
-				sc.close();
-	}
-}
