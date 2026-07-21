@@ -1,0 +1,44 @@
+class Solution {
+    public int maxActiveSectionsAfterTrade(String s) {
+        int n = s.length();
+
+        int totalOnes = 0;
+        for (char c : s.toCharArray()) {
+            if (c == '1') totalOnes++;
+        }
+
+        int ans = totalOnes;
+
+        int i = 0;
+        int prevZeroLen = -1;
+
+        while (i < n) {
+            int j = i;
+            while (j < n && s.charAt(j) == s.charAt(i)) {
+                j++;
+            }
+
+            int len = j - i;
+
+            if (s.charAt(i) == '0') {
+                prevZeroLen = len;
+            } else {
+                // Only if this 1-block is surrounded by zeros
+                if (prevZeroLen != -1 && j < n) {
+                    int k = j;
+                    while (k < n && s.charAt(k) == '0') {
+                        k++;
+                    }
+                    if (k > j) {
+                        int rightZeroLen = k - j;
+                        ans = Math.max(ans, totalOnes + prevZeroLen + rightZeroLen);
+                    }
+                }
+            }
+
+            i = j;
+        }
+
+        return ans;
+    }
+}
