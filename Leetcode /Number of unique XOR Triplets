@@ -1,0 +1,37 @@
+class Solution {
+    public int uniqueXorTriplets(int[] nums) {
+        final int MAX = 2048;
+
+        boolean[] present = new boolean[MAX];
+        for (int x : nums) {
+            present[x] = true;
+        }
+
+        // pairXor[v] = true if v can be formed by XOR of two numbers
+        boolean[] pairXor = new boolean[MAX];
+
+        for (int a : nums) {
+            for (int b : nums) {
+                pairXor[a ^ b] = true;
+            }
+        }
+
+        // tripletXor[v] = true if v can be formed by XOR of three numbers
+        boolean[] tripletXor = new boolean[MAX];
+
+        for (int x = 0; x < MAX; x++) {
+            if (!pairXor[x]) continue;
+
+            for (int num : nums) {
+                tripletXor[x ^ num] = true;
+            }
+        }
+
+        int ans = 0;
+        for (boolean b : tripletXor) {
+            if (b) ans++;
+        }
+
+        return ans;
+    }
+}
