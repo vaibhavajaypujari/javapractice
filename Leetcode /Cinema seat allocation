@@ -1,0 +1,53 @@
+import java.util.*;
+
+class Solution {
+    public int maxNumberOfFamilies(int n, int[][] reservedSeats) {
+
+        // Store reserved seats only for rows that actually have reservations
+        Map<Integer, Integer> map = new HashMap<>();
+
+        for (int[] seat : reservedSeats) {
+            int row = seat[0];
+            int col = seat[1];
+
+            // We only care about seats 2 to 9
+            if (col >= 2 && col <= 9) {
+                int bit = 1 << (col - 2);
+                map.put(row, map.getOrDefault(row, 0) | bit);
+            }
+        }
+
+        // Masks for the three possible 4-seat blocks
+        // Seats: 2,3,4,5
+        int left = (1 << 0) | (1 << 1) | (1 << 2) | (1 << 3);
+
+        // Seats: 4,5,6,7
+        int middle = (1 << 2) | (1 << 3) | (1 << 4) | (1 << 5);
+
+        // Seats: 6,7,8,9
+        int right = (1 << 4) | (1 << 5) | (1 << 6) | (1 << 7);
+
+        int answer = 0;
+
+        // Rows without any reservation can always fit 2 groups
+        answer = (n - map.size()) * 2;
+
+        // Process only rows that contain reservations
+        for (int reserved : map.values()) {
+
+            boolean leftFree = (reserved & left) == 0;
+            boolean middleFree = (reserved & middle) == 0;
+            boolean rightFree = (reserved & right) == 0;
+
+            if (leftFree && rightFree) {
+                // Two non-overlapping groups
+                answer += 2;
+            } else if (leftFree || middleFree || rightFree) {
+                // At least one group can fit
+                answer += 1;
+            }
+        }
+
+        return answer;
+    }
+}
